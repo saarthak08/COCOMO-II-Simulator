@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">COCOMO-Simulator</string>
+    <string name="app_name">COCOMO-II Simulator</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -13,4 +13,10 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="via_sloc_source_lines_of_code">Via SLOC (Source Lines of Code)</string>
+    <string name="via_fp_function_point">Via FP (Function Point)</string>
+    <string name="choose_any_option_for_calculation_of_cost">Choose any option for calculation of cost:</string>
 </resources>

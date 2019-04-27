@@ -1,11 +1,8 @@
-package com.sg.cocomo_simulator;
+package com.sg.cocomo_simulator.view;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
+import android.os.Handler;
 
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,16 +10,22 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.sg.cocomo_simulator.R;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.Menu;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    boolean doubleBackToExitPressedOnce = false;
+    FragmentManager fragmentManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +33,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,13 +44,25 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+            doubleBackToExitPressedOnce = true;
+            Toast.makeText(MainActivity.this,"Press \'BACK\' again to exit",Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            },2000);
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
