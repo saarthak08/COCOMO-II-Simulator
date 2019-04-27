@@ -20,4 +20,8 @@
     <string name="via_fp_function_point">Via FP (Function Point)</string>
     <string name="choose_any_option_for_calculation_of_cost">Choose any option for calculation of cost:</string>
     <string name="created_by_saarthak_gupta">Created By: Saarthak Gupta</string>
+    <string name="calculate">Calculate</string>
+    <string name="history">History</string>
+    <string name="important">Important</string>
+    <string name="new_calculation">New Calculation</string>
 </resources>

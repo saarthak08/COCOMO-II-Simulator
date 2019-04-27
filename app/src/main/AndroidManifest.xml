@@ -3,6 +3,7 @@
     package="com.sg.cocomo_simulator">
 
     <application
+        android:name=".di.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_chrome_reader_mode"
         android:label="@string/app_name"
