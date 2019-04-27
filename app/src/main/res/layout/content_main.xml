@@ -39,12 +39,11 @@
                 android:layout_marginBottom="@dimen/dimen_64x"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/paprika"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:text="@string/via_sloc_source_lines_of_code"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="@dimen/text_16x"
-                android:textStyle="bold|italic"
                 tools:ignore="PrivateResource"
                 tools:targetApi="m" />
 
@@ -58,12 +57,11 @@
                 android:layout_marginBottom="@dimen/dimen_64x"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
-                android:fontFamily="sans-serif-black"
+                android:fontFamily="@font/paprika"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:text="@string/via_fp_function_point"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="@dimen/text_16x"
-                android:textStyle="bold|italic"
                 tools:targetApi="m" />
         </LinearLayout>
 

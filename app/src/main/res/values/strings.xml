@@ -19,4 +19,5 @@
     <string name="via_sloc_source_lines_of_code">Via SLOC (Source Lines of Code)</string>
     <string name="via_fp_function_point">Via FP (Function Point)</string>
     <string name="choose_any_option_for_calculation_of_cost">Choose any option for calculation of cost:</string>
+    <string name="created_by_saarthak_gupta">Created By: Saarthak Gupta</string>
 </resources>
