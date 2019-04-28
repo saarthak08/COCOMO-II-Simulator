@@ -112,7 +112,7 @@ public class CalculateFragment extends Fragment {
         sloc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                b = new MaterialDialog.Builder(view.getContext()).title("Enter the value of SLOC:").autoDismiss(false).inputRange(1, 18).inputType(InputType.TYPE_CLASS_NUMBER).input("Example: 1,10,100...", null, false, new MaterialDialog.InputCallback() {
+                b = new MaterialDialog.Builder(view.getContext()).title("Enter the value of SLOC:").inputRange(1, 18).inputType(InputType.TYPE_CLASS_NUMBER).input("Example: 1,10,100...", null, false, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                         MainActivity.slocvalue = Long.parseLong((input.toString()));
@@ -240,7 +240,6 @@ public class CalculateFragment extends Fragment {
                         if(MainActivity.isSLOC)
                         {
                             fragmentTransaction.replace(R.id.MainFrame,new ResultSLOCFragment()).commit();
-
                         }
                         else{
                             fragmentTransaction.replace(R.id.MainFrame,new ResultFPFragment()).commit();
