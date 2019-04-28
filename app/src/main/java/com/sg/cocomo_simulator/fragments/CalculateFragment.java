@@ -107,7 +107,7 @@ public class CalculateFragment extends Fragment {
                 b = new MaterialDialog.Builder(view.getContext()).title("Enter the value of SLOC:").inputRange(1, 18).inputType(InputType.TYPE_CLASS_NUMBER).input("Example: 1,10,100...", null, false, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        MainActivity.slocvalue = Long.parseLong((input.toString()));
+                        MainActivity.slocvalue = Long.parseLong((input.toString().trim()));
                     }
                 }).cancelable(false).canceledOnTouchOutside(false).positiveText("OK").onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -270,7 +270,13 @@ public class CalculateFragment extends Fragment {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                             try {
-                                MainActivity.costperperson=Double.parseDouble(input.toString());
+                                if(Double.parseDouble(input.toString())>0) {
+                                    MainActivity.costperperson = Double.parseDouble(input.toString().trim());
+                                }
+                                else
+                                {
+                                    Snackbar.make(getView(),"Error! Cost per person can't be negative.",Snackbar.LENGTH_SHORT).show();
+                                }
                             }
                             catch (Exception e)
                             {
@@ -286,16 +292,10 @@ public class CalculateFragment extends Fragment {
                 }).onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                if(MainActivity.costperperson!=-1&&MainActivity.costperperson>0) {
                     fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                     fragmentTransaction.replace(R.id.MainFrame, new ResultFragment()).commit();
-                }
-                if(MainActivity.costperperson<0)
-                {
-                    Snackbar.make(getView(),"Error! Cost per person can't be negative.",Snackbar.LENGTH_SHORT).show();
-                }
             }
         }).show();
     }

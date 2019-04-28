@@ -6,10 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +30,7 @@ public class ResultFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private FragmentManager fragmentManager;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,11 +78,27 @@ public class ResultFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        double sloc,effort,kloc,tdev;
+        double sloc,effort,kloc,tdev,totalcost;
         TextView textViewFP=view.findViewById(R.id.tvfpr);
         Spinner spinner=view.findViewById(R.id.spinner3);
         spinner.setAdapter(new ArrayAdapter<String>(getContext(),R.layout.spinneritem,MainActivity.classofproduct));
         spinner.setSelection(MainActivity.selectedclass);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=MainActivity.selectedclass) {
+                    MainActivity.selectedclass = position;
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    fragmentTransaction.replace(R.id.MainFrame, new ResultFragment()).commit();
+                }}
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         if(!MainActivity.isSLOC) {
             textViewFP.setText("Function Point: " + MainActivity.fpvalue + "\n\nLanguage Factor: " + MainActivity.langfactor+"\n\n");
             sloc = MainActivity.fpvalue * MainActivity.langfactor;
@@ -94,6 +114,8 @@ public class ResultFragment extends Fragment {
                     effort*=MainActivity.costdrivers[i];
                 }
                 tdev = (2.5) * (Math.pow(effort, 0.38));
+                totalcost=MainActivity.costperperson*(effort/tdev);
+
 
             } else if (MainActivity.selectedclass == 1) {
                 kloc = sloc / 1000;
@@ -103,6 +125,8 @@ public class ResultFragment extends Fragment {
                     effort*=MainActivity.costdrivers[i];
                 }
                 tdev = (2.5) * (Math.pow(effort, 0.35));
+                totalcost=MainActivity.costperperson*(effort/tdev);
+
             } else {
                 kloc = sloc / 1000;
                 effort = (3.6) * (Math.pow(kloc, 1.20));
@@ -111,7 +135,8 @@ public class ResultFragment extends Fragment {
                     effort*=MainActivity.costdrivers[i];
                 }
                 tdev = (2.5) * (Math.pow(effort, 0.32));
+                totalcost=MainActivity.costperperson*(effort/tdev);
             }
-            textViewFP.append("SLOC: " + sloc + "\n\nKLOC: " + kloc + "\n\nEffort: " + effort + " Person-Months\n\nDevelopment Time: " + tdev+" Months"+"\n\nCost per Person: "+MainActivity.costperperson);
+            textViewFP.append("SLOC: " + sloc + "\n\nKLOC: " + kloc + "\n\nEffort: " + effort + " Person-Months\n\nDevelopment Time: " + tdev+" Months"+"\n\nCost per Person: "+MainActivity.costperperson+" Units\n\nTotal Cost: "+totalcost+" Units");
         }
 }

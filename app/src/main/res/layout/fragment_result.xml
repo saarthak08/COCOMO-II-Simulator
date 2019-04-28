@@ -32,7 +32,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8x"
+                android:fontFamily="@font/amarante"
                 android:textSize="@dimen/text_24x" />
         </ScrollView>
+        <Button
+            android:id="@+id/costdriverbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cost_drivers"
+            android:fontFamily="@font/trade_winds"/>
     </LinearLayout>
 </FrameLayout>
