@@ -69,6 +69,7 @@ public class CostDriverAdapter extends RecyclerView.Adapter<CostDriverAdapter.Co
                         double[] values=costDrivers.get(getAdapterPosition()).getSpinnervalues();
                         MainActivity.costdrivers[getAdapterPosition()]=values[position];
                         costDrivers.get(getAdapterPosition()).setSelectedspinner(position);
+                        notifyDataSetChanged();
                     }
                 }
 
