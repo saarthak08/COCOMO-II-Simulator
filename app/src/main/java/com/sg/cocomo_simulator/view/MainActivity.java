@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static int selectedclass;
     public static boolean isSLOC;
     public static double costperperson;
-    public static int[] costdrivers=new int[15];
+    public static double[] costdrivers=new double[15];
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     public static ArrayList<String> classofproduct=new ArrayList<>();

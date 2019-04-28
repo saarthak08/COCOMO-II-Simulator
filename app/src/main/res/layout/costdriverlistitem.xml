@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_4x">
+
+    <TextView
+        android:id="@+id/costdrivername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/text_16x"
+        android:fontFamily="@font/fredericka_the_great"
+        android:text="TextView" />
+
+
+    <Spinner
+        android:id="@+id/costdriverspinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/costdrivervalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/trade_winds"
+        android:textSize="@dimen/text_16x"
+        android:text="TextView" />
+</LinearLayout>

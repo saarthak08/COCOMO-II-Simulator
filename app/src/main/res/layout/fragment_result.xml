@@ -39,7 +39,10 @@
             android:id="@+id/costdriverbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cost_drivers"
-            android:fontFamily="@font/trade_winds"/>
+            android:textSize="@dimen/text_24x"
+            android:fontFamily="@font/trade_winds"
+            android:text="@string/cost_drivers"/>
+
+
     </LinearLayout>
 </FrameLayout>

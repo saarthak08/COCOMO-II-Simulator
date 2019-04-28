@@ -8,17 +8,28 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.sg.cocomo_simulator.R;
+import com.sg.cocomo_simulator.adapter.CostDriverAdapter;
+import com.sg.cocomo_simulator.model.CostDriver;
 import com.sg.cocomo_simulator.view.MainActivity;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +42,11 @@ public class ResultFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private FragmentManager fragmentManager;
+    private String[] allfive=new String[5];
+    private String[] lastfour=new String[4];
+    private String[] firstFour=new String[4];
+    private String[] lastThree=new String[3];
+    int verylow,low,nominal,high,veryhigh;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -79,6 +95,14 @@ public class ResultFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         double sloc,effort,kloc,tdev,totalcost;
+        Button costdriverbutton=view.findViewById(R.id.costdriverbutton);
+        costdriverbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                costdriver();
+            }
+        });
+        setString();
         TextView textViewFP=view.findViewById(R.id.tvfpr);
         Spinner spinner=view.findViewById(R.id.spinner3);
         spinner.setAdapter(new ArrayAdapter<String>(getContext(),R.layout.spinneritem,MainActivity.classofproduct));
@@ -138,5 +162,55 @@ public class ResultFragment extends Fragment {
                 totalcost=MainActivity.costperperson*(effort/tdev);
             }
             textViewFP.append("SLOC: " + sloc + "\n\nKLOC: " + kloc + "\n\nEffort: " + effort + " Person-Months\n\nDevelopment Time: " + tdev+" Months"+"\n\nCost per Person: "+MainActivity.costperperson+" Units\n\nTotal Cost: "+totalcost+" Units");
-        }
+    }
+    public void costdriver()
+    {
+        ArrayList<CostDriver> costDrivers=new ArrayList<>(15);
+        int selected[]=new int[15];
+        costDrivers.add(new CostDriver("Required Software Reliability",MainActivity.costdrivers[0],allfive,new double[]{0.75,0.88,1.00,1.15,1.40}));
+        costDrivers.add(new CostDriver("Size of Application Database",MainActivity.costdrivers[1],lastfour,new double[]{0.94,1.00,1.08,1.16}));
+        LayoutInflater li = LayoutInflater.from(getView().getContext());
+        final View promptsView = li.inflate(R.layout.costdriver_dialogbox, null);
+        RecyclerView recyclerView=promptsView.findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        CostDriverAdapter costDriverAdapter=new CostDriverAdapter(costDrivers,getContext());
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        recyclerView.setAdapter(costDriverAdapter);
+        new MaterialDialog.Builder(getContext()).customView(promptsView,true).positiveText("OK").negativeText("Cancel").canceledOnTouchOutside(true)
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                }).onPositive(new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                fragmentTransaction.replace(R.id.MainFrame, new ResultFragment()).commit();
+            }
+        }).show();
+
+    }
+    public void setString()
+    {
+        allfive[0]="Very Low";
+        allfive[1]="Low";
+        allfive[2]="Nominal";
+        allfive[3]="High";
+        allfive[4]="Very High";
+        firstFour[0]="Very Low";
+        firstFour[1]="Low";
+        firstFour[2]="Nominal";
+        firstFour[3]="High";
+        lastfour[0]="Low";
+        lastfour[1]="Nominal";
+        lastfour[2]="High";
+        lastfour[3]="Very High";
+        lastThree[0]="Nominal";
+        lastThree[1]="High";
+        lastThree[2]="Very High";
+    }
 }
