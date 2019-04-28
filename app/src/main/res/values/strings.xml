@@ -27,4 +27,7 @@
     <string name="choose_the_programming_language">Choose programming language:</string>
     <string name="fp">FP</string>
     <string name="language_factor">Language Factor: 53</string>
+    <string name="cost_drivers">Cost Drivers</string>
+    <string name="scale_factors">Scale Factors</string>
+    <string name="mark_as_important">Mark as Important</string>
 </resources>
