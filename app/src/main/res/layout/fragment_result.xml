@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:clickable="true"
     android:background="#B8B290"
-    tools:context=".fragments.ResultFPFragment"
+    tools:context=".fragments.ResultFragment"
     android:focusable="true">
 
     <LinearLayout
@@ -31,18 +31,8 @@
                 android:id="@+id/tvfpr"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_8x"
                 android:textSize="@dimen/text_24x" />
         </ScrollView>
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cost_drivers" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mark_as_important" />
     </LinearLayout>
 </FrameLayout>

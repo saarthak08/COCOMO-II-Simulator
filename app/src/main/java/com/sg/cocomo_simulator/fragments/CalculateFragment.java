@@ -1,23 +1,16 @@
 package com.sg.cocomo_simulator.fragments;
 
 
-import android.app.Application;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Handler;
 import android.text.InputType;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,7 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -35,8 +27,6 @@ import com.sg.cocomo_simulator.R;
 import com.sg.cocomo_simulator.view.MainActivity;
 
 import java.util.ArrayList;
-
-import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -105,6 +95,7 @@ public class CalculateFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sloc = view.findViewById(R.id.sloc);
         fp = view.findViewById(R.id.fp);
+        setcostdrivers();
         classofproduct.add("Organic");
         classofproduct.add("Semidetached");
         classofproduct.add("Embedded");
@@ -237,13 +228,7 @@ public class CalculateFragment extends Fragment {
                         fragmentManager= getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                        if(MainActivity.isSLOC)
-                        {
-                            fragmentTransaction.replace(R.id.MainFrame,new ResultSLOCFragment()).commit();
-                        }
-                        else{
-                            fragmentTransaction.replace(R.id.MainFrame,new ResultFPFragment()).commit();
-                        }
+                        fragmentTransaction.replace(R.id.MainFrame,new ResultFragment()).commit();
                     }
                 }).onNegative(new MaterialDialog.SingleButtonCallback() {
             @Override
@@ -268,6 +253,14 @@ public class CalculateFragment extends Fragment {
         lang.add("ASP");
         lang.add("Visual Basic");
         lang.add("Assembler");
+    }
+
+    public void setcostdrivers()
+    {
+        for(int i=0;i<15;i++)
+        {
+            MainActivity.costdrivers[i]=1;
+        }
     }
 
 }
