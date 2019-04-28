@@ -169,6 +169,19 @@ public class ResultFragment extends Fragment {
         int selected[]=new int[15];
         costDrivers.add(new CostDriver("Required Software Reliability",MainActivity.costdrivers[0],allfive,new double[]{0.75,0.88,1.00,1.15,1.40}));
         costDrivers.add(new CostDriver("Size of Application Database",MainActivity.costdrivers[1],lastfour,new double[]{0.94,1.00,1.08,1.16}));
+        costDrivers.add(new CostDriver("Complexity of the Product",MainActivity.costdrivers[2],allfive,new double[]{0.70,0.85,1.00,1.15,1.30}));
+        costDrivers.add(new CostDriver("Running Performance Constraints",MainActivity.costdrivers[3],lastThree,new double[]{1.00,1.11,1.30}));
+        costDrivers.add(new CostDriver("Memory Constraints",MainActivity.costdrivers[4],lastThree,new double[]{1.00,1.06,1.21}));
+        costDrivers.add(new CostDriver("Volatility of the Virtual Machine Environment",MainActivity.costdrivers[5],lastfour,new double[]{0.87,1.00,1.15,1.30}));
+        costDrivers.add(new CostDriver("Required Turnabout Time",MainActivity.costdrivers[6],lastfour,new double[]{0.94,1.00,1.07,1.15}));
+        costDrivers.add(new CostDriver("Analyst Capability",MainActivity.costdrivers[7],allfive,new double[]{1.46,1.19,1.00,0.86,0.71}));
+        costDrivers.add(new CostDriver("Applications Experience",MainActivity.costdrivers[8],allfive,new double[]{1.29,1.13,1.00,0.91,0.82}));
+        costDrivers.add(new CostDriver("Software Engineer Capability",MainActivity.costdrivers[9],allfive,new double[]{1.42,1.17,1.00,0.86,0.70}));
+        costDrivers.add(new CostDriver("Virtual Machine Experience",MainActivity.costdrivers[10],firstFour,new double[]{1.21,1.10,1.00,0.90}));
+        costDrivers.add(new CostDriver("Programming Language Experience",MainActivity.costdrivers[11],firstFour,new double[]{1.14,1.07,1.00,0.95}));
+        costDrivers.add(new CostDriver("Application of Software Engineering Methods",MainActivity.costdrivers[12],allfive,new double[]{1.24,1.10,1.00,0.91,0.82}));
+        costDrivers.add(new CostDriver("Use of Software Tools",MainActivity.costdrivers[13],allfive,new double[]{1.24,1.10,1.00,0.91,0.83}));
+        costDrivers.add(new CostDriver("Required Development Scheduele",MainActivity.costdrivers[14],allfive,new double[]{1.23,1.08,1.00,1.04,1.10}));
         LayoutInflater li = LayoutInflater.from(getView().getContext());
         final View promptsView = li.inflate(R.layout.costdriver_dialogbox, null);
         RecyclerView recyclerView=promptsView.findViewById(R.id.recyclerview);
@@ -188,7 +201,7 @@ public class ResultFragment extends Fragment {
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 fragmentTransaction.replace(R.id.MainFrame, new ResultFragment()).commit();
             }
         }).show();

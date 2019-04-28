@@ -256,7 +256,7 @@ public class CalculateFragment extends Fragment {
     {
         for(int i=0;i<15;i++)
         {
-            MainActivity.costdrivers[i]=1;
+            MainActivity.costdrivers[i]=1.00;
         }
     }
 
