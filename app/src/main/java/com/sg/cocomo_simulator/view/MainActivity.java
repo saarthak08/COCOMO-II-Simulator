@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public static double fpvalue;
     public static int selectedclass;
     public static boolean isSLOC;
+    public static double costperperson;
     public static int[] costdrivers=new int[15];
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;

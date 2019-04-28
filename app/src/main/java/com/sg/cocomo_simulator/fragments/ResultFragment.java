@@ -89,19 +89,29 @@ public class ResultFragment extends Fragment {
             if (MainActivity.selectedclass == 0) {
                 kloc = sloc / 1000;
                 effort = (2.4) * (Math.pow(kloc, 1.05));
+                for(int i=0;i<15;i++)
+                {
+                    effort*=MainActivity.costdrivers[i];
+                }
                 tdev = (2.5) * (Math.pow(effort, 0.38));
 
             } else if (MainActivity.selectedclass == 1) {
-                sloc = MainActivity.fpvalue * MainActivity.langfactor;
                 kloc = sloc / 1000;
                 effort = (3.0) * (Math.pow(kloc, 1.12));
+                for(int i=0;i<15;i++)
+                {
+                    effort*=MainActivity.costdrivers[i];
+                }
                 tdev = (2.5) * (Math.pow(effort, 0.35));
             } else {
-                sloc = MainActivity.fpvalue * MainActivity.langfactor;
                 kloc = sloc / 1000;
                 effort = (3.6) * (Math.pow(kloc, 1.20));
+                for(int i=0;i<15;i++)
+                {
+                    effort*=MainActivity.costdrivers[i];
+                }
                 tdev = (2.5) * (Math.pow(effort, 0.32));
             }
-            textViewFP.append("SLOC: " + sloc + "\n\nKLOC: " + kloc + "\n\nEffort: " + effort + "\n\nDevelopment Time: " + tdev);
+            textViewFP.append("SLOC: " + sloc + "\n\nKLOC: " + kloc + "\n\nEffort: " + effort + " Person-Months\n\nDevelopment Time: " + tdev+" Months"+"\n\nCost per Person: "+MainActivity.costperperson);
         }
 }

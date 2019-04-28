@@ -96,6 +96,7 @@ public class CalculateFragment extends Fragment {
         sloc = view.findViewById(R.id.sloc);
         fp = view.findViewById(R.id.fp);
         setcostdrivers();
+        MainActivity.costperperson=-1;
         classofproduct.add("Organic");
         classofproduct.add("Semidetached");
         classofproduct.add("Embedded");
@@ -224,11 +225,7 @@ public class CalculateFragment extends Fragment {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialoge, @NonNull DialogAction which) {
-                        dialoge.dismiss();
-                        fragmentManager= getActivity().getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                        fragmentTransaction.replace(R.id.MainFrame,new ResultFragment()).commit();
+                        costperperson();
                     }
                 }).onNegative(new MaterialDialog.SingleButtonCallback() {
             @Override
@@ -261,6 +258,46 @@ public class CalculateFragment extends Fragment {
         {
             MainActivity.costdrivers[i]=1;
         }
+    }
+
+    public void costperperson()
+    {
+        new MaterialDialog.Builder(getContext()).title("Enter Cost per Person: ").cancelable(false)
+                .canceledOnTouchOutside(false).positiveText("OK").negativeText("Cancel")
+                .inputRange(1,18)
+                .inputType(InputType.TYPE_NUMBER_FLAG_DECIMAL)
+                .input("Example: 1,10,100....", null, false, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                            try {
+                                MainActivity.costperperson=Double.parseDouble(input.toString());
+                            }
+                            catch (Exception e)
+                            {
+                                Snackbar.make(getView(), "Error! Invalid Input", Snackbar.LENGTH_SHORT).show();
+                            }
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.cancel();
+                    }
+                }).onPositive(new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                if(MainActivity.costperperson!=-1&&MainActivity.costperperson>0) {
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    fragmentTransaction.replace(R.id.MainFrame, new ResultFragment()).commit();
+                }
+                if(MainActivity.costperperson<0)
+                {
+                    Snackbar.make(getView(),"Error! Cost per person can't be negative.",Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        }).show();
     }
 
 }
