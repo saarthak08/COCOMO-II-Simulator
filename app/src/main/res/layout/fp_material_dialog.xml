@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/editTextFP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_margin="@dimen/dimen_8x"
+        android:inputType="numberDecimal"
+        android:hint="@string/fp"
+        tools:ignore="Autofill" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:layout_marginTop="@dimen/dimen_8x"
+        android:textSize="@dimen/text_24x"
+        android:fontFamily="cursive"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="@string/choose_the_programming_language"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:layout_marginBottom="@dimen/dimen_4x" />
+
+    <TextView
+        android:id="@+id/langfactv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:layout_marginTop="@dimen/dimen_8x"
+        android:textSize="@dimen/text_24x"
+        android:fontFamily="@font/fredericka_the_great"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="@string/language_factor"
+        android:textStyle="bold" />
+</LinearLayout>

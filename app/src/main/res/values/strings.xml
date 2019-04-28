@@ -24,4 +24,7 @@
     <string name="history">History</string>
     <string name="important">Important</string>
     <string name="new_calculation">New Calculation</string>
+    <string name="choose_the_programming_language">Choose programming language:</string>
+    <string name="fp">FP</string>
+    <string name="language_factor">Language Factor: 53</string>
 </resources>
