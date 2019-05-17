@@ -1,6 +1,7 @@
 package com.sg.cocomo_simulator.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,12 +65,17 @@ public class CostDriverAdapter extends RecyclerView.Adapter<CostDriverAdapter.Co
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if(position!=costDrivers.get(getAdapterPosition()).getSelectedspinner())
+                    try {
+                        if (position != costDrivers.get(getAdapterPosition()).getSelectedspinner()) {
+                            double[] values = costDrivers.get(getAdapterPosition()).getSpinnervalues();
+                            MainActivity.costdrivers[getAdapterPosition()] = values[position];
+                            costDrivers.get(getAdapterPosition()).setSelectedspinner(position);
+                            notifyDataSetChanged();
+                        }
+                    }
+                    catch (Exception e)
                     {
-                        double[] values=costDrivers.get(getAdapterPosition()).getSpinnervalues();
-                        MainActivity.costdrivers[getAdapterPosition()]=values[position];
-                        costDrivers.get(getAdapterPosition()).setSelectedspinner(position);
-                        notifyDataSetChanged();
+                        Log.i("ArrayException",e.getMessage());
                     }
                 }
 
